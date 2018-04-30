@@ -68,19 +68,19 @@ function changeCardColor(card, color) {
 
 //Store the selected color and the card element in arrays
 function registerAnswers(userAnswer, clickedCard) {
-  if(userAnswers.length < 2 && clickedCards.length < 2) {
     userAnswers.push(userAnswer);
     clickedCards.push(clickedCard);
-  }
 }
 
-//Check if the the user answer is correct
-function checkAnswers() {
+//Check if the the user answer is correct and clear the answers and the cards if necessary
+function handleAnswers() {
   if(userAnswers[0] !== userAnswers[1]) {
-    return false;
+    clearCards();
+    clearAnswers();
   }
   else {
-    return true;
+    addPoint();
+    clearAnswers(true);
   }
 }
 
@@ -116,6 +116,16 @@ function addPoint() {
   }
 }
 
+// Handle each user's click by changing the card color, storing the result and comparing them
+function playMoove(card, answer) {
+  changeCardColor(card, answer);
+  registerAnswers(answer, card);
+      if(userAnswers.length === 2 && clickedCards.length === 2) {
+        allowClick = false;
+        handleAnswers();
+      }
+}
+
 //Restart the game
 function restartGame() {
   alert("vous avez gagné !");
@@ -138,19 +148,7 @@ function startGame() {
   for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener("click", function(){
       if(allowClick) {
-        changeCardColor(this, colors[i]);
-        registerAnswers(colors[i], this);
-            if(userAnswers.length === 2 && clickedCards.length === 2) {
-              allowClick = false;
-              if(checkAnswers()){
-                addPoint();
-                clearAnswers(true);
-              }
-              else {
-                clearCards();
-                clearAnswers();
-              }
-            }
+        playMoove(this, colors[i]);
       }
     });
   }
