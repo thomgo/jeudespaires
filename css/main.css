@@ -98,6 +98,15 @@ textarea {
   height: 150px;
 }
 
+h1{
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
+.lead {
+  font-style: italic;
+  border-top: 1px solid white;
+  padding-top: 1em;
+}
 
 /* ##################################################################### */
 /* ##########################   SMARTPHONE   ########################### */
