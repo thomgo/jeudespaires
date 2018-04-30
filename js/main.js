@@ -68,6 +68,22 @@ function changeCardColor(card, color) {
 //Game calculation functions
 //
 
+//Function to start the time
+function timer() {
+  var seconds = 30;
+  var timer = document.getElementById("timer");
+  timer.innerHTML = "<i class='fas fa-hourglass-start ml-2'></i> Temps restant : " + seconds + " s";
+  setInterval(function(){
+    if(seconds >= 1) {
+      seconds --;
+      timer.innerHTML = "<i class='fas fa-hourglass-start ml-2'></i> Temps restant : " + seconds + " s";
+    }
+    else {
+      restartGame(false);
+    }
+  }, 1000);
+}
+
 //Store the selected color and the card element in arrays
 function registerAnswers(userAnswer, clickedCard) {
     userAnswers.push(userAnswer);
@@ -129,8 +145,13 @@ function playMoove(card, answer) {
 }
 
 //Restart the game
-function restartGame() {
-  alert("Vous avez gagné !");
+function restartGame(winner = true) {
+  if(winner) {
+    alert("Vous avez gagné !");
+  }
+  else {
+    alert("Vous avez perdu, vous n'avez pas trouvé les paires dans le temps imparti");
+  }
   location.reload();
 }
 
@@ -143,6 +164,7 @@ function restartGame() {
 //Initialize the game
 function startGame() {
   addCards();
+  timer();
 
   var colors = randomizeColors();
   var cards = document.getElementsByClassName("card");
