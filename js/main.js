@@ -9,6 +9,8 @@ var clickedCards = [];
 var allowClick = true;
 var score = 0;
 
+var startGameButton = document.getElementById("startGame");
+
 //
 //
 // ~~~~~~~ Functions ~~~~~~~~
@@ -156,4 +158,7 @@ function startGame() {
 }
 
 
-startGame();
+startGameButton.addEventListener("click", function() {
+  this.style.display = "none";
+  startGame();
+});
