@@ -44,7 +44,7 @@ function randomizeColors() {
 function createCard() {
   var card = document.createElement('div');
   card.className = "col-sm-2";
-  card.innerHTML = "<div class='card my-2'></div>";
+  card.innerHTML = "<div class='card my-2' style='background-color: black'></div>";
   return card;
 }
 
@@ -128,7 +128,7 @@ function playMoove(card, answer) {
 
 //Restart the game
 function restartGame() {
-  alert("vous avez gagné !");
+  alert("Vous avez gagné !");
   location.reload();
 }
 
@@ -147,7 +147,7 @@ function startGame() {
 
   for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener("click", function(){
-      if(allowClick) {
+      if(allowClick && this.style.backgroundColor === 'black') {
         playMoove(this, colors[i]);
       }
     });
